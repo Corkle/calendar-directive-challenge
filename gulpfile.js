@@ -28,7 +28,9 @@ gulp.task('bundle-scripts', ['clean-scripts'],function () {
 function partialsToTemplates() {
     return gulp.src(paths.partials)
     .pipe(plugins.htmlmin({collapseWhitespace: true, removeComments: true}))
-    .pipe(plugins.angularTemplatecache({standalone: true}));
+    .pipe(plugins.angularTemplatecache({standalone: true, transformUrl: function(url) {
+        return url.replace('./app/','');
+    }}));
 }
 
 gulp.task('html', function() {
@@ -52,7 +54,7 @@ gulp.task('usemin', ['bundle-scripts'],function () {
 });
 
 gulp.task('clean', function () {
-    gulp.src([paths.build, paths.ngscriptPath + paths.ngscriptName], {
+    gulp.src([paths.build + '**/*', !paths.build + '.git/', paths.ngscriptPath + paths.ngscriptName], {
             read: false
         })
         .pipe(plugins.clean());

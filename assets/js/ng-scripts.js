@@ -1,4 +1,4 @@
-var app = angular.module('calApp', []);
+var app = angular.module('calApp', ['templates']);
 var CalendarRange = {
 
     DAY : 24 * 60 * 60 * 1000,
@@ -58,7 +58,7 @@ var CalendarRange = {
 app.directive('calendarTool', function() {
    return {
        restrict: 'E',
-       templateUrl: './app/shared/calendar-tool/calendar-tool.html'
+       templateUrl: 'shared/calendar-tool/calendar-tool.html'
    };
 });
 angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("shared/calendar-tool/calendar-tool.html","<div>calendar-tool</div>");}]);
